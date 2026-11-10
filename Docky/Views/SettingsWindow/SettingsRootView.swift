@@ -248,6 +248,15 @@ struct SettingsRootView: View {
                     .help("Forward")
                 }
             }
+
+            // SwiftUI only pushes the detail's navigation title to the toolbar
+            // after the first selection change, so a freshly opened window had
+            // the arrows but no title. Draw it here, next to them.
+            ToolbarItem(placement: .navigation) {
+                Text(selection.title)
+                    .font(.headline)
+                    .padding(.leading, 6)
+            }
         }
         .onAppear { consumePendingPane() }
         .onChange(of: navigator.pendingPaneID) { _ in consumePendingPane() }
@@ -336,7 +345,6 @@ private struct SettingsDetailView: View {
             selectedView
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
-        .navigationTitle(pane.title)
     }
 
     @ViewBuilder
