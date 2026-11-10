@@ -20,7 +20,10 @@ final class SettingsWindowController: NSWindowController, NSWindowDelegate {
         window.styleMask.insert(.fullSizeContentView)
         window.title = "Settings"
         window.titleVisibility = .hidden
-        window.titlebarAppearsTransparent = true
+        // Keep the full-height sidebar, but let AppKit draw the titlebar's
+        // own background: with a transparent bar the grouped forms scrolled
+        // their rows straight over the pane title instead of under it.
+        window.titlebarAppearsTransparent = false
         window.toolbarStyle = .unified
         window.toolbar = NSToolbar(identifier: "DockySettingsToolbar")
         window.center()
