@@ -25,7 +25,9 @@ final class SettingsWindowController: NSWindowController, NSWindowDelegate {
         // their rows straight over the pane title instead of under it.
         window.titlebarAppearsTransparent = false
         window.toolbarStyle = .unified
-        window.toolbar = NSToolbar(identifier: "DockySettingsToolbar")
+        // Let SwiftUI create the toolbar. Assigning an empty NSToolbar here
+        // left its items (back/forward and the pane title) uninstalled until
+        // the first selection change, so a freshly opened window had none.
         window.center()
         window.isReleasedWhenClosed = false
         self.init(window: window)
